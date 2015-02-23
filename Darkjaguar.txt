@@ -1,0 +1,11 @@
+## Title: Dark-Jaguar
+## Description: Dark-Jaguar it to become a full UI replacement
+## APIVersion: 100010
+
+libs/class.lua
+libs/eventmanager/djeventmanager.lua
+libs/controls/djpowerbar.lua
+
+modules/DJUIAddon.lua
+
+modules/UnitFrames/player/player.lua
