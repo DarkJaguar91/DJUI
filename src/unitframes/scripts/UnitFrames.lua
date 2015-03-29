@@ -4,6 +4,7 @@
 local unitFrames = {}
 unitFrames.__index = unitFrames
 unitFrames.inCombat = false
+unitFrames.cameraActive = true
 
 --region Player object
 unitFrames.player = {}
@@ -23,6 +24,10 @@ function unitFrames.player:HideLogic()
 	self.frame.hideTimeline:Stop()
 	if unitFrames.inCombat then
 		self.frame:SetAlpha(1)
+		return
+	end
+	if not unitFrames.cameraActive then
+		self.frame:SetAlpha(0)
 		return
 	end
 
@@ -286,4 +291,16 @@ DJUI:AddEvent(EVENT_PLAYER_COMBAT_STATE, function(_, inCombat)
 	unitFrames.inCombat = inCombat
 	unitFrames.player:HideLogic()
 end)
+
+DJUI:AddEvent(EVENT_GAME_CAMERA_DEACTIVATED, function()
+	unitFrames.cameraActive = false
+	unitFrames.player:HideLogic()
+end)
+
+DJUI:AddEvent(EVENT_GAME_CAMERA_ACTIVATED, function()
+	unitFrames.cameraActive = true
+	unitFrames.player:HideLogic()
+end)
+
+
 --endregion

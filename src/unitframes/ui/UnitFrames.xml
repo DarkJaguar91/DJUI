@@ -12,13 +12,13 @@
                     <Limits min="0" max="100"/>
 
                     <Controls>
-                        <Label name="$(parent)PercentageText" layer="0" level="3" color="FFFFFFFF"
+                        <Label name="$(parent)PercentageText" layer="0" level="3" color="FF000000"
                                font="DJSTATUSBARFONT">
-                            <Anchor point="TOPRIGHT" offsetY="-1" offsetX="-3"/>
+                            <Anchor point="TOPRIGHT" offsetY="-2" offsetX="-3"/>
                         </Label>
-                        <Label name="$(parent)ValueText" layer="0" level="3" color="FFFFFFFF"
+                        <Label name="$(parent)ValueText" layer="0" level="3" color="FF000000"
                                font="DJSTATUSBARFONT">
-                            <Anchor point="TOPLEFT" offsetY="-1" offsetX="3"/>
+                            <Anchor point="TOPLEFT" offsetY="-2" offsetX="3"/>
                         </Label>
                     </Controls>
                 </StatusBar>
@@ -36,13 +36,13 @@
                     <Limits min="0" max="100"/>
 
                     <Controls>
-                        <Label name="$(parent)PercentageText" layer="0" level="3" color="FFFFFFFF"
+                        <Label name="$(parent)PercentageText" layer="0" level="3" color="FF000000"
                                font="DJSTATUSBARFONT">
-                            <Anchor point="TOPLEFT" offsetY="-1" offsetX="3"/>
+                            <Anchor point="TOPLEFT" offsetY="-2" offsetX="3"/>
                         </Label>
-                        <Label name="$(parent)ValueText" layer="0" level="3" color="FFFFFFFF"
+                        <Label name="$(parent)ValueText" layer="0" level="3" color="FF000000"
                                font="DJSTATUSBARFONT">
-                            <Anchor point="TOPRIGHT" offsetY="-1" offsetX="-3"/>
+                            <Anchor point="TOPRIGHT" offsetY="-2" offsetX="-3"/>
                         </Label>
                     </Controls>
                 </StatusBar>
