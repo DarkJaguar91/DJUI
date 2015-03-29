@@ -38,7 +38,7 @@ function unitFrames.player:HideLogic()
 	_, max = bar:GetMinMax()
 	if bar:GetValue() ~= max then
 		recharging = true
-	end	
+	end
 
 	bar = unitFrames:getBar(self.tag, POWERTYPE_STAMINA)
 	_, max = bar:GetMinMax()
@@ -94,7 +94,7 @@ unitFrames.tagTexts = {
 --endregion
 
 --region UI Item Getters
-function unitFrames:getUnitObject(tag) 
+function unitFrames:getUnitObject(tag)
 	if tag == 'player' then
 		return self.player
 	elseif tag == 'reticleover' then
@@ -107,7 +107,7 @@ function unitFrames:getBarParent(tag, type)
 
 	if tagText and typeText then
 		return _G['DJ' .. tagText .. typeText]
-	end 	
+	end
 end
 
 function unitFrames:getBar(tag, type)
@@ -115,7 +115,7 @@ function unitFrames:getBar(tag, type)
 
 	if tagText and typeText then
 		return _G['DJ' .. tagText .. typeText .. 'Bar']
-	end 	
+	end
 end
 
 function unitFrames:getPercentageText(tag, type)
@@ -123,7 +123,7 @@ function unitFrames:getPercentageText(tag, type)
 
 	if tagText and typeText then
 		return _G['DJ' .. tagText .. typeText .. 'BarPercentageText']
-	end 	
+	end
 end
 
 function unitFrames:getValueText(tag, type)
@@ -131,7 +131,7 @@ function unitFrames:getValueText(tag, type)
 
 	if tagText and typeText then
 		return _G['DJ' .. tagText .. typeText .. 'BarValueText']
-	end 	
+	end
 end
 
 function unitFrames:getNameLabel(tag)
@@ -190,7 +190,7 @@ function unitFrames:InitPowerDetails(unitTag, barType, value, max)
 		else
 			par:SetAlpha(1)
 		end
-		
+
 		bar:SetColor(unpack(DJUI.constants.colors[barType]))
 
 		unitFrames:createBarAnimation(bar, barType, unitTag)
@@ -217,6 +217,9 @@ function unitFrames:InitFrame(tag)
 
 	local val, max = GetUnitPower(tag, POWERTYPE_HEALTH)
 	unitFrames:InitPowerDetails(tag, POWERTYPE_HEALTH, val, max)
+	if tag == unitFrames.target.tag then
+		unitFrames:getBar(tag, POWERTYPE_HEALTH):SetColor(unpack(DJUI.constants.reaction[GetUnitReaction(tag)]))
+	end
 
 	val, max = GetUnitPower(tag, POWERTYPE_MAGICKA)
 	unitFrames:InitPowerDetails(tag, POWERTYPE_MAGICKA, val, max)
@@ -275,7 +278,6 @@ DJUI:AddEvent(EVENT_RETICLE_TARGET_CHANGED, function()
 end)
 
 DJUI:AddEvent(EVENT_PLAYER_COMBAT_STATE, function(_, inCombat)
-	d(inCombat)
 	unitFrames.inCombat = inCombat
 	unitFrames.player:HideLogic()
 end)
