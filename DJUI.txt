@@ -1,0 +1,23 @@
+## Title: DarkJaguar
+## APIVersion: 100011
+
+; --- Libs ---
+src/libs/Fonts.xml
+; ------------
+
+; --- Main Addon Files ---
+src/main/DJUI.lua
+src/main/Constants.lua
+; ------------------------
+
+; --- UnitFrames ---
+;; UI
+src/unitframes/ui/UnitFrames.xml
+src/unitframes/ui/Player.xml
+src/unitframes/ui/Target.xml
+;; Scripts
+src/unitframes/scripts/Player.lua
+src/unitframes/scripts/UnitFrames.lua
+; ------------------
+
+

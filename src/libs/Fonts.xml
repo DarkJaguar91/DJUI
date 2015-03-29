@@ -1,0 +1,4 @@
+<GuiXml>
+    <Font name="DJNAMEFONT" font="$(HANDWRITTEN_FONT)|18" />
+    <Font name="DJSTATUSBARFONT" font="$(STONE_TABLET_FONT)|8|soft-shadow-thin" />
+</GuiXml>
