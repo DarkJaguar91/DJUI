@@ -217,9 +217,6 @@ function unitFrames:InitFrame(tag)
 
 	local val, max = GetUnitPower(tag, POWERTYPE_HEALTH)
 	unitFrames:InitPowerDetails(tag, POWERTYPE_HEALTH, val, max)
-	if tag == unitFrames.target.tag then
-		unitFrames:getBar(tag, POWERTYPE_HEALTH):SetColor(unpack(DJUI.constants.reaction[GetUnitReaction(tag)]))
-	end
 
 	val, max = GetUnitPower(tag, POWERTYPE_MAGICKA)
 	unitFrames:InitPowerDetails(tag, POWERTYPE_MAGICKA, val, max)
@@ -235,6 +232,10 @@ function unitFrames:UpdatePowerDetails(unitTag, barType, value, max)
 	if bar then
 		bar:SetMinMax(0, max)
 		bar:SetValue(value)
+
+		if tag == unitFrames.target.tag and barType == POWERTYPE_HEALTH then
+			bar:SetColor(unpack(DJUI.constants.reaction[GetUnitReaction(tag)]))
+		end
 	end
 
 	local percentageText = self:getPercentageText(unitTag, barType)
