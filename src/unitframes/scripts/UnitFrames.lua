@@ -191,8 +191,12 @@ function unitFrames:InitPowerDetails(unitTag, barType, value, max)
 			par:SetAlpha(1)
 		end
 
-		bar:SetColor(unpack(DJUI.constants.colors[barType]))
-
+		if unitTag == unitFrames.target.tag and barType == POWERTYPE_HEALTH then
+			bar:SetColor(unpack(DJUI.constants.reaction[GetUnitReaction(unitTag)]))
+		else
+			bar:SetColor(unpack(DJUI.constants.colors[barType]))	
+		end
+	
 		unitFrames:createBarAnimation(bar, barType, unitTag)
 	end
 end
@@ -217,7 +221,7 @@ function unitFrames:InitFrame(tag)
 
 	local val, max = GetUnitPower(tag, POWERTYPE_HEALTH)
 	unitFrames:InitPowerDetails(tag, POWERTYPE_HEALTH, val, max)
-
+	
 	val, max = GetUnitPower(tag, POWERTYPE_MAGICKA)
 	unitFrames:InitPowerDetails(tag, POWERTYPE_MAGICKA, val, max)
 
@@ -233,8 +237,8 @@ function unitFrames:UpdatePowerDetails(unitTag, barType, value, max)
 		bar:SetMinMax(0, max)
 		bar:SetValue(value)
 
-		if tag == unitFrames.target.tag and barType == POWERTYPE_HEALTH then
-			bar:SetColor(unpack(DJUI.constants.reaction[GetUnitReaction(tag)]))
+		if unitTag == unitFrames.target.tag and barType == POWERTYPE_HEALTH then
+			bar:SetColor(unpack(DJUI.constants.reaction[GetUnitReaction(unitTag)]))
 		end
 	end
 
