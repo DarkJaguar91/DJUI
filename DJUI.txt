@@ -1,0 +1,11 @@
+## Title: DJUI
+## Author: Dark-Jaguar
+## APIVersion: 100011
+
+; Libs
+src/class/Class.lua
+
+; Unit Frames
+src/unitframes/ui/djstatusbar.lua
+
+src/unitframes/player.lua
