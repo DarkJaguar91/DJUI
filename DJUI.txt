@@ -5,7 +5,12 @@
 ; Libs
 src/class/Class.lua
 
+; Addon Files
+src/main.lua
+
 ; Unit Frames
 src/unitframes/ui/djstatusbar.lua
+src/unitframes/ui/djunitframe.lua
 
 src/unitframes/player.lua
+src/unitframes/target.lua
