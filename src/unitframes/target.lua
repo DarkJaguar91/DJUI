@@ -38,7 +38,8 @@ function target:Init()
 	target:Show()
 end
 
-DJUI:AddPlugin('Target', target, function()
+DJUI:AddPlugin('Target', target, function()	
+	ZO_TargetUnitFramereticleover:SetAnchor(TOPLEFT, GuiRoot, nil, -1000, -1000)
 	target:Hide()
 end)
 

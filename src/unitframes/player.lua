@@ -56,6 +56,10 @@ DJUI:AddPlugin('Player', player, function()
 	player:SetBarValues(POWERTYPE_HEALTH)
 	player:SetBarValues(POWERTYPE_MAGICKA)
 	player:SetBarValues(POWERTYPE_STAMINA)
+	
+	ZO_PlayerAttributeHealth:SetHidden(true)
+	ZO_PlayerAttributeMagicka:SetHidden(true)
+	ZO_PlayerAttributeStamina:SetHidden(true)
 end)
 
 DJUI:AddEvent(EVENT_POWER_UPDATE, function(_, unitTag, _, type, val, max, effMax)

@@ -42,4 +42,3 @@ if not SLASH_COMMANDS['/rl'] then
 		ReloadUI()
 	end
 end
-
