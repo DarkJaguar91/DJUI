@@ -1,0 +1,4 @@
+<GuiXml>
+    <Font name="DJNAMEFONT" font="$(MEDIUM_FONT)|18" />
+    <Font name="DJSTATUSBARFONT" font="$(CHAT_FONT)|12" />
+</GuiXml>
