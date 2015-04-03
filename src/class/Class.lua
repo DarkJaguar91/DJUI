@@ -1,3 +1,8 @@
+local DJUI = LibStub('DJUI')
+
+if DJUI.Class then
+	return
+end
 
 local function getClassNames(name)
 	local _, _end, className = name:find('%s*(%a%w*)%s*%:?')
@@ -37,9 +42,9 @@ local function createClass(classTable, ...)
 	return outObj
 end
 
-
-DJClass = function(name)
-	local environment = getfenv(2)
+DJUI.classes = {}
+DJUI.class = function(name)
+	local environment = DJUI.classes
 
 	local className, baseName = getClassNames(name)
 

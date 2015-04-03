@@ -1,9 +1,14 @@
-local target = DJUnitFrame(true)
+local DJUI = LibStub:GetLibrary('DJUI')
+
+if DJUI.unitFrames.target then
+	return
+end
+
+local target = DJUI.unitFrames.unitFrame(true)
+DJUI.unitFrames.player = target
+
 local tag = 'reticleover'
 target.tag = tag
-
-target:SetDimensions(300, 80)
-target:SetAnchor(CENTER, GuiRoot, CENTER, 300, 400)
 
 target.health:SetBarColor(0.8, 0.1, 0.15, 1)
 
@@ -38,7 +43,10 @@ function target:Init()
 	target:Show()
 end
 
-DJUI:AddPlugin('Target', target, function()	
+DJUI:AddLoad(function(saved)
+	target:SetDimensions(unpack(saved.unitFrames.target.dimensions))
+	target:SetAnchor(unpack(saved.unitFrames.target.position))
+		
 	ZO_TargetUnitFramereticleover:SetAnchor(TOPLEFT, GuiRoot, nil, -1000, -1000)
 	target:Hide()
 end)

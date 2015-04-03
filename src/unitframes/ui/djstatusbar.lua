@@ -1,3 +1,9 @@
+local DJUI = LibStub('DJUI')
+
+if DJUI.unitFrames.statusBar then
+	return
+end
+
 local statusBarObj = {}
 statusBarObj.__index = statusBarObj
 
@@ -176,4 +182,4 @@ function statusBarObj:SetAnimationCompleteListener(func)
 	self.updateTimeline:SetHandler('OnStop', func)
 end
 
-DJClass 'DJStatusBar'(statusBarObj)
+DJUI.unitFrames.statusBar = DJUI.class 'DJStatusBar'(statusBarObj)

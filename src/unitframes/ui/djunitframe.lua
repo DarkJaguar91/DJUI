@@ -1,3 +1,9 @@
+local DJUI = LibStub('DJUI')
+
+if DJUI.unitFrames.unitFrame then
+	return
+end
+
 local unitFrame = {}
 unitFrame.__index = unitFrame
 
@@ -23,19 +29,19 @@ function unitFrame:CreateUIElements()
 	self.name:SetColor(0.6, 0.6, 0.6, 1)
 	self.name:SetText('Name')
 
-	self.health = DJStatusBar(self.tlw, self.reverse)
+	self.health = DJUI.unitFrames.statusBar(self.tlw, self.reverse)
 	self.health:SetHeight(20)
 	self.health:SetAnchor(TOPLEFT, self.tlw, TOPLEFT, nil, self.level:GetHeight())
 	self.health:SetAnchor(TOPRIGHT, self.tlw, TOPRIGHT, nil, self.level:GetHeight())
 	self.health:SetBarColor(1, 0, 0, 1)
 	
-	self.magicka = DJStatusBar(self.tlw, self.reverse)
+	self.magicka = DJUI.unitFrames.statusBar(self.tlw, self.reverse)
 	self.magicka:SetHeight(20)
 	self.magicka:SetAnchor(TOPLEFT, self.health.border, BOTTOMLEFT)
 	self.magicka:SetAnchor(TOPRIGHT, self.health.border, BOTTOMRIGHT)
 	self.magicka:SetBarColor(0, 0, 1, 1)
 	
-	self.stamina = DJStatusBar(self.tlw, self.reverse)
+	self.stamina = DJUI.unitFrames.statusBar(self.tlw, self.reverse)
 	self.stamina:SetHeight(20)
 	self.stamina:SetAnchor(TOPLEFT, self.magicka.border, BOTTOMLEFT)
 	self.stamina:SetAnchor(TOPRIGHT, self.magicka.border, BOTTOMRIGHT)
@@ -88,4 +94,4 @@ function unitFrame:SetMetaTable()
 	end
 end
 
-DJClass 'DJUnitFrame'(unitFrame)
+DJUI.unitFrames.unitFrame = DJUI.class 'DJUnitFrame'(unitFrame)

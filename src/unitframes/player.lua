@@ -1,11 +1,16 @@
-local player = DJUnitFrame()
+local DJUI = LibStub:GetLibrary('DJUI')
+
+if DJUI.unitFrames.player then
+	return
+end
+
+local player = DJUI.unitFrames.unitFrame()
+DJUI.unitFrames.player = player
+
 local tag = 'player'
 local inCombat = false
 local cinematic = false
 player.tag = tag
-
-player:SetDimensions(300, 80)
-player:SetAnchor(CENTER, GuiRoot, CENTER, -300, 400)
 
 local function complete()
 	player:HideLogic()
@@ -49,7 +54,10 @@ function player:HideLogic()
 	end
 end
 
-DJUI:AddPlugin('Player', player, function()
+DJUI:AddLoad(function(saved)
+	player:SetDimensions(unpack(saved.unitFrames.player.dimensions))
+	player:SetAnchor(unpack(saved.unitFrames.player.position))
+
 	player.level:SetText(GetUnitLevel(tag))
 	player.name:SetText(GetUnitName(tag))
 	

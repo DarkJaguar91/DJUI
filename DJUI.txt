@@ -1,12 +1,30 @@
 ## Title: DJUI
-## Author: Dark-Jaguar
 ## APIVersion: 100011
+## OptionalDependsOn: LibAddonMenu-2.0
+## SavedVariables: DJUISavedVars
+
+; LibStub & LAM
+src/lib/LibStub\LibStub.lua
+
+src/lib/lam\LibAddonMenu-2.0.lua
+
+src/lib/lam\controls\panel.lua
+src/lib/lam\controls\submenu.lua
+src/lib/lam\controls\button.lua
+src/lib/lam\controls\checkbox.lua
+src/lib/lam\controls\colorpicker.lua
+src/lib/lam\controls\custom.lua
+src/lib/lam\controls\description.lua
+src/lib/lam\controls\dropdown.lua
+src/lib/lam\controls\editbox.lua
+src/lib/lam\controls\header.lua
+src/lib/lam\controls\slider.lua
+src/lib/lam\controls\texture.lua
 
 ; Libs
+src/DJUI.lua
+src/constants/saved.lua
 src/class/Class.lua
-
-; Addon Files
-src/main.lua
 
 ; Unit Frames
 src/unitframes/ui/djstatusbar.lua
