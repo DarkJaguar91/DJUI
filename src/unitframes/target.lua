@@ -6,16 +6,10 @@ target:SetDimensions(300, 80)
 target:SetAnchor(CENTER, GuiRoot, CENTER, 300, 400)
 
 target.health:SetBarColor(0.8, 0.1, 0.15, 1)
-target.health:SetBorderSize(2)
-target.health:SetBorderColor(0, 0, 0, 1)
 
 target.magicka:SetBarColor(0.1, 0.1, 0.6, 1)
-target.magicka:SetBorderSize(2)
-target.magicka:SetBorderColor(0, 0, 0, 1)
 
 target.stamina:SetBarColor(0.05, 0.6, 0.03, 1)
-target.stamina:SetBorderSize(2)
-target.stamina:SetBorderColor(0, 0, 0, 1)
 
 function target:SetBarValues(powerType, val, max, effMax)
 	if target.bars[powerType] then

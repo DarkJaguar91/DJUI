@@ -10,42 +10,45 @@ function statusBarObj:__init__(TLW, reverse)
 end
 
 function statusBarObj:CreateUIElements()
-	self.border = CreateControl(nil, self.tlw, CT_BACKDROP)
-	self.border:SetCenterColor(0, 0, 0, 0)
-	self.border:SetEdgeColor(0, 0, 0, 0)
+	self.border = CreateControl(nil, self.tlw, CT_TEXTURE)
+	self.border:SetTexture('/esoui/art/miscellaneous/progressbar_frame.dds')
 	self.border:SetDrawLayer(0)
-	self.border:SetDrawLevel(2)
+	self.border:SetDrawLevel(3)
+	self.border:SetTextureCoords(0, 0.612, 0, 0.6)
+	self.border:SetTextureRotation(self.reverse and 3.14159265 or 0)
 	
 	self.background = CreateControl(nil, self.border, CT_TEXTURE)
-	self.background:SetColor(0.6, 0.6, 0.6, 0.2)
-	self.background:SetAnchor(TOPLEFT)
-		self.background:SetAnchor(BOTTOMRIGHT)
+	self.background:SetAnchorFill(self.border)
+	self.background:SetDrawLayer(0)
+	self.background:SetDrawLevel(1)
+	self.background:SetTexture('/esoui/art/miscellaneous/progressbar_frame_bg.dds')
+	self.background:SetTextureCoords(0, 0.612, 0, 6)
+	self.background:SetTextureRotation(self.reverse and 3.14159265 or 0)
 	
 	self.bar = CreateControl(nil, self.border, CT_STATUSBAR)
-	self.bar:SetAnchor(TOPLEFT)
-	self.bar:SetAnchor(BOTTOMRIGHT)
+	self.bar:SetAnchorFill(self.border)
 	self.bar:SetMinMax(0, 100)
 	self.bar:SetValue(50)
 	self.bar:SetDrawLayer(0)
-	self.bar:SetDrawLevel(1)
+	self.bar:SetDrawLevel(2)
 	self.bar:SetBarAlignment(self.reverse and BAR_ALIGNMENT_REVERSE or BAR_ALIGNMENT_NORMAL)
-	
-	self.glow = CreateControl(nil, self.border, CT_TEXTURE)
-	self.glow:SetColor(0, 0, 0, 0)
-	self.glow:SetAnchor(TOPLEFT)
-	self.glow:SetAnchor(BOTTOMRIGHT)
-	self.glow:SetDrawLayer(0)
-	self.glow:SetDrawLevel(3)
-	
+	self.bar:SetTexture('/esoui/art/miscellaneous/progressbar_genericfill.dds')
+	self.bar:SetTextureCoords(0, 0.612, 0, 0.6)
+   self.bar:EnableLeadingEdge(true)
+   self.bar:SetLeadingEdge('/esoui/art/miscellaneous/progressbar_genericfill_leadingedge.dds', 10, 20)
+   self.bar:SetLeadingEdgeTextureCoords(0, 1, 0, 0.6)	
+		
 	self.percent = CreateControl(nil, self.border, CT_LABEL)
-	self.percent:SetColor(0, 0, 0, 1)
-	self.percent:SetFont('$(CHAT_FONT)|12|shadow')
-	self.percent:SetAnchor(self.reverse and TOPLEFT or TOPRIGHT, nil, nil, self.reverse and 5 or -5, -1)
+	self.percent:SetColor(0.6, 0.6, 0.6, 1)
+	self.percent:SetFont('$(CHAT_FONT)|8|shadow')
+	self.percent:SetAnchor(self.reverse and TOPLEFT or TOPRIGHT, nil, nil, self.reverse and 10 or -10)
+	self.percent:SetVerticalAlignment(TEXT_ALIGN_CENTER)
 	
 	self.value = CreateControl(nil, self.border, CT_LABEL)
-	self.value:SetColor(0, 0, 0, 1)
-	self.value:SetFont('$(CHAT_FONT)|12|shadow')
-	self.value:SetAnchor(self.reverse and TOPRIGHT or TOPLEFT, nil, nil, self.reverse and -5 or 5, -1)
+	self.value:SetColor(0.6, 0.6, 0.6, 1)
+	self.value:SetFont('$(CHAT_FONT)|8|shadow')
+	self.value:SetAnchor(self.reverse and TOPRIGHT or TOPLEFT, nil, nil, self.reverse and -3 or 3)
+	self.value:SetVerticalAlignment(TEXT_ALIGN_CENTER)
 end
 
 function statusBarObj:CreateAnimations()
@@ -104,16 +107,6 @@ function statusBarObj:CreateMetaTable()
 	end
 end
 
-function statusBarObj:SetBorderColor(r, g, b, a)
-	self.border:SetEdgeColor(r, g, b, a)
-end
-
-function statusBarObj:SetBorderSize(w)
-	self.border:SetEdgeTexture(nil, 2, 2, w)
-	self.bar:SetAnchor(TOPLEFT, nil, nil, w, w)
-	self.bar:SetAnchor(BOTTOMRIGHT, nil, nil, -w, -w)
-end
-
 function statusBarObj:SetValue(value, max, min)
 	if max then
 		self.bar:SetMinMax(min or 0, max)
@@ -129,7 +122,7 @@ function statusBarObj:UpdateDetails(current)
 	local _, max = self.bar:GetMinMax()
 	
 	self.bar:SetValue(current)	
-	self.percent:SetText(math.floor(current / max * 100) .. '%')
+	self.percent:SetText(self:GetPercentage() .. '%')
 	self.value:SetText(current)
 end
 
@@ -147,8 +140,15 @@ end
 
 function statusBarObj:SetHeight(h)
 	self.border:SetHeight(h)
-	self.percent:SetFont('$(CHAT_FONT)|' .. math.floor(h*0.8) .. '|shadow')
-	self.value:SetFont('$(CHAT_FONT)|' .. math.floor(h*0.8) .. '|shadow')
+	self.percent:SetHeight(h)
+	self.percent:SetFont('$(CHAT_FONT)|' .. math.floor(h*0.6) .. '|shadow')
+	self.value:SetHeight(h)
+	self.value:SetFont('$(CHAT_FONT)|' .. math.floor(h*0.6) .. '|shadow')
+end
+
+function statusBarObj:GetPercentage()
+	local min, max = self.bar:GetMinMax()
+	return math.floor(self.bar:GetValue() / max * 100)
 end
 
 function statusBarObj:Show()
@@ -157,6 +157,10 @@ end
 
 function statusBarObj:Hide()
 	self.border:SetAlpha(0)
+end
+
+function statusBarObj:SetAnimationCompleteListener(func)
+	self.updateTimeline:SetHandler('OnStop', func)
 end
 
 DJClass 'DJStatusBar'(statusBarObj)

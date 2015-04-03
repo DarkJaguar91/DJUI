@@ -28,24 +28,18 @@ function unitFrame:CreateUIElements()
 	self.health:SetAnchor(TOPLEFT, self.tlw, TOPLEFT, nil, self.level:GetHeight())
 	self.health:SetAnchor(TOPRIGHT, self.tlw, TOPRIGHT, nil, self.level:GetHeight())
 	self.health:SetBarColor(1, 0, 0, 1)
-	self.health:SetBorderCenterColor(0, 0, 0, 0)
-	self.health:SetBorderEdgeColor(0, 0, 0, 0)
 	
 	self.magicka = DJStatusBar(self.tlw, self.reverse)
 	self.magicka:SetHeight(20)
 	self.magicka:SetAnchor(TOPLEFT, self.health.border, BOTTOMLEFT)
 	self.magicka:SetAnchor(TOPRIGHT, self.health.border, BOTTOMRIGHT)
 	self.magicka:SetBarColor(0, 0, 1, 1)
-	self.magicka:SetBorderCenterColor(0, 0, 0, 0)
-	self.magicka:SetBorderEdgeColor(0, 0, 0, 0)
 	
 	self.stamina = DJStatusBar(self.tlw, self.reverse)
 	self.stamina:SetHeight(20)
 	self.stamina:SetAnchor(TOPLEFT, self.magicka.border, BOTTOMLEFT)
 	self.stamina:SetAnchor(TOPRIGHT, self.magicka.border, BOTTOMRIGHT)
 	self.stamina:SetBarColor(0, 1, 0, 1)
-	self.stamina:SetBorderCenterColor(0, 0, 0, 0)
-	self.stamina:SetBorderEdgeColor(0, 0, 0, 0)
 	
 	self.bars = {
 		[POWERTYPE_HEALTH] = self.health,
@@ -67,9 +61,9 @@ function unitFrame:Show()
 	self.hideTimeline:PlayFromStart()
 end
 
-function unitFrame:Hide()
+function unitFrame:Hide(alpha)
 	self.hideTimeline:Stop()
-	self.hideAnimation:SetAlphaValues(self.tlw:GetAlpha(), 0)
+	self.hideAnimation:SetAlphaValues(self.tlw:GetAlpha(), alpha or 0)
 	self.hideTimeline:PlayFromStart()
 end
 
