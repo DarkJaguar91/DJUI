@@ -74,11 +74,11 @@ DJUI:AddEvent(EVENT_PLAYER_COMBAT_STATE, function(_, combatState)
 end)
 
 DJUI:AddEvent(EVENT_GAME_CAMERA_ACTIVATED, function()
-	cinematic = true
+	cinematic = false
 	player:HideLogic()
 end)
 
 DJUI:AddEvent(EVENT_GAME_CAMERA_DEACTIVATED, function()
-	cinematic = false
+	cinematic = true
 	player:HideLogic()
 end)
