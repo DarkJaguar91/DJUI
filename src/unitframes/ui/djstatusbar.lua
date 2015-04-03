@@ -33,10 +33,20 @@ function statusBarObj:CreateUIElements()
 	self.bar:SetDrawLevel(2)
 	self.bar:SetBarAlignment(self.reverse and BAR_ALIGNMENT_REVERSE or BAR_ALIGNMENT_NORMAL)
 	self.bar:SetTexture('/esoui/art/miscellaneous/progressbar_genericfill.dds')
-	self.bar:SetTextureCoords(0, 0.612, 0, 0.6)
+	self.bar:SetTextureCoords(0, 1, 0, 0.6)
    self.bar:EnableLeadingEdge(true)
    self.bar:SetLeadingEdge('/esoui/art/miscellaneous/progressbar_genericfill_leadingedge.dds', 10, 20)
    self.bar:SetLeadingEdgeTextureCoords(0, 1, 0, 0.6)	
+   
+   self.glow = CreateControl(nil, self.border, CT_STATUSBAR)
+	self.glow:SetAnchorFill(self.border)
+	self.glow:SetColor(1, 1, 1, 0.8)
+	self.glow:SetDrawLayer(0)
+	self.glow:SetDrawLevel(2)
+	self.glow:SetTexture('/esoui/art/miscellaneous/progressbar_genericfill_gloss.dds')
+	self.glow:SetTextureCoords(0, 1, 0, 0.6)	
+	self.glow:SetLeadingEdge('/esoui/art/miscellaneous/progressbar_genericfill_leadingedge_gloss.dds', 10, 20)
+   self.glow:SetLeadingEdgeTextureCoords(0, 1, 0, 0.6)	
 		
 	self.percent = CreateControl(nil, self.border, CT_LABEL)
 	self.percent:SetColor(0.6, 0.6, 0.6, 1)
@@ -110,6 +120,7 @@ end
 function statusBarObj:SetValue(value, max, min)
 	if max then
 		self.bar:SetMinMax(min or 0, max)
+		self.glow:SetMinMax(min or 0, max)
 	end
 
 	self.updateTimeline:Stop()
@@ -122,6 +133,7 @@ function statusBarObj:UpdateDetails(current)
 	local _, max = self.bar:GetMinMax()
 	
 	self.bar:SetValue(current)	
+	self.glow:SetValue(current)
 	self.percent:SetText(self:GetPercentage() .. '%')
 	self.value:SetText(current)
 end
