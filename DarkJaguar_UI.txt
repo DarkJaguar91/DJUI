@@ -1,0 +1,43 @@
+## Title: DarkJaguar_UI
+## Description: Complete UI Replace (Well... it will be!)
+## APIVersion: 100011
+## OptionalDependsOn: LibAddonMenu-2.0
+## SavedVariables: DarkJaguarUISavedVars
+
+; Libraries
+;; LibStub
+libs/LibStub/LibStub.lua
+
+; LAM
+libs/lam/LibAddonMenu-2.0.lua
+
+libs/lam/controls\panel.lua
+libs/lam/controls\submenu.lua
+libs/lam/controls\button.lua
+libs/lam/controls\checkbox.lua
+libs/lam/controls\colorpicker.lua
+libs/lam/controls\custom.lua
+libs/lam/controls\description.lua
+libs/lam/controls\dropdown.lua
+libs/lam/controls\editbox.lua
+libs/lam/controls\header.lua
+libs/lam/controls\slider.lua
+libs/lam/controls\texture.lua
+
+; Object Declaration
+src/darkjaguarui.lua
+
+; Class
+src/class/class.lua
+
+; Utils
+src/util/ui/uiutil.lua
+
+; Defaults
+src/defaults/defaults.lua
+
+; UI
+src/ui/statusbar.lua
+
+; UnitFrames
+src/unitframes/player.lua

@@ -1,6 +1,7 @@
-local DJUI = LibStub('DJUI')
+local NAME = 'DarkJaguar_UI'
+local DJUI = LibStub(NAME)
 
-if DJUI.Class then
+if DJUI.class then
 	return
 end
 
@@ -11,8 +12,8 @@ local function getClassNames(name)
 		return className
 	end
 
-	local baseName = nil
-	_, _end, baseName = name:find('%s*(%a%w*)%s*', _end + 1)
+	local baseName
+    _, _, baseName = name:find('%s*(%a%w*)%s*', _end + 1)
 
 	return className, baseName
 end
@@ -48,8 +49,8 @@ DJUI.class = function(name)
 
 	local className, baseName = getClassNames(name)
 
-	local baseObj = nil
-	if baseName then
+	local baseObj
+    if baseName then
 		baseObj = assert(environment[baseName])
 	end
 
@@ -57,7 +58,7 @@ DJUI.class = function(name)
 		local metaTable = {
 			__call = createClass,
 			__base__ = baseObj,
-			__tostring = function(self) return className end,
+			__tostring = function() return className end,
 			__index = function(_, key)
 				if baseObj and baseObj[key] then
 					return baseObj[key]
