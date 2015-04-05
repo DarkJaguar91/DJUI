@@ -12,7 +12,7 @@ if DJUI.saved then
     return
 end
 
-local savedDefaults = {
+DJUI.savedDefaults = {
     player = {
         levelColor = {0.6, 0.6, 0.6, 1},
         nameColor = {0.6, 0.6, 0.6, 1},
@@ -56,6 +56,7 @@ local savedDefaults = {
         nameColor = {0.6, 0.6, 0.6, 1},
         position = nil,
         width = 300,
+        hideDefault = true,
         bars = {
             [POWERTYPE_HEALTH] = {
                 color = {0.8, 0.1, 0.15, 1},
@@ -71,5 +72,5 @@ local savedDefaults = {
 }
 
 DJUI:AddLoad(function()
-    DJUI.saved = ZO_SavedVars:New("DarkJaguarUISavedVars", DJUI.version, 'test', savedDefaults)
+    DJUI.saved = ZO_SavedVars:New("DarkJaguarUISavedVars", DJUI.version, 'test', DJUI.savedDefaults)
 end)

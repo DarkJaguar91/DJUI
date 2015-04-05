@@ -240,6 +240,7 @@ function player:CreateSettings()
     self.settings = {
         type = 'panel',
         name = 'DJUI Player Unit Frame',
+        registerForRefresh = true,
     }
 
     self.settingsOptions = {
@@ -394,6 +395,17 @@ function player:CreateSettings()
                     end,
                 },
             }
+        },
+        {
+            type = "button",
+            name = "Reset Defaults",
+            tooltip = "Resets all settings to default.",
+            func = function() 
+                DJUI.saved.player = DJUI.savedDefaults.player
+                self:Load(DJUI.saved.player)
+                ReloadUI()
+            end,
+            warning = "Will reload the UI!", --(optional)
         },
     }
 

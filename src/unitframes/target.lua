@@ -96,6 +96,15 @@ function target:Load(save)
     self.barReactionColor = save.barReactionColor
     self.nameReactionColor = save.nameReactionColor
 
+    if save.hideDefault then
+        if not self.defaultLoc then
+            self.defaultLoc = {ZO_TargetUnitFramereticleover:GetLeft(), ZO_TargetUnitFramereticleover:GetTop()}
+        end
+        ZO_TargetUnitFramereticleover:SetAnchor(TOPLEFT, GuiRoot, TOPLEFT, -1000, -1000)
+    elseif self.defaultLoc then
+        ZO_TargetUnitFramereticleover:SetAnchor(TOPLEFT, GuiRoot, TOPLEFT, self.defaultLoc[1], self.defaultLoc[2])
+    end
+
     for k, v in pairs(self.bars) do
         v:Load(save.bars[k])
     end
@@ -206,9 +215,20 @@ function target:CreateSettings()
     self.settings = {
         type = 'panel',
         name = 'DJUI Target Unit Frame',
+        registerForRefresh = true,
     }
 
     self.settingsOptions = {
+        {
+            type = "checkbox",
+            name = "Hide Default Target Bar?",
+            tooltip = "Hides the Default Target Bar",
+            getFunc = function() return DJUI.saved.target.hideDefault end,
+            setFunc = function(value)
+                DJUI.saved.target.hideDefault = value
+                self:Load(DJUI.saved.target)
+            end,
+        },
         {
             type = "slider",
             name = "Target Frame Width",
@@ -302,6 +322,17 @@ function target:CreateSettings()
                     end,
                 },
             }
+        },
+        {
+            type = "button",
+            name = "Reset Defaults",
+            tooltip = "Resets all settings to default.",
+            func = function() 
+                DJUI.saved.target = DJUI.savedDefaults.target
+                self:Load(DJUI.saved.target)
+                ReloadUI()
+            end,
+            warning = "Will reload the UI!", --(optional)
         },
     }
 
