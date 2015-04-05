@@ -5,7 +5,7 @@
 -- Time: 10:17 PM
 --
 
-local NAME, VERSION = 'DarkJaguar_UI', 0.01
+local NAME, VERSION = 'DJUI', 0.01
 
 local DJUI = LibStub:NewLibrary(NAME, VERSION)
 

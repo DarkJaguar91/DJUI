@@ -5,7 +5,7 @@
 -- Time: 07:50 AM
 --
 
-local NAME = 'DarkJaguar_UI'
+local NAME = 'DJUI'
 local DJUI = LibStub(NAME)
 
 if DJUI.ui and DJUI.ui.util then

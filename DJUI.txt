@@ -1,8 +1,8 @@
-## Title: DarkJaguar_UI
+## Title: DJUI
 ## Description: Complete UI Replace (Well... it will be!)
 ## APIVersion: 100011
 ## OptionalDependsOn: LibAddonMenu-2.0
-## SavedVariables: DarkJaguarUISavedVars
+## SavedVariables: DJUISavedVars
 
 ; Libraries
 ;; LibStub
@@ -41,3 +41,4 @@ src/ui/statusbar.lua
 
 ; UnitFrames
 src/unitframes/player.lua
+src/unitframes/target.lua

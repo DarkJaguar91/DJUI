@@ -5,7 +5,7 @@
 -- Time: 10:40 PM
 --
 
-local NAME = 'DarkJaguar_UI'
+local NAME = 'DJUI'
 
 local DJUI = LibStub(NAME)
 

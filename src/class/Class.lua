@@ -1,4 +1,4 @@
-local NAME = 'DarkJaguar_UI'
+local NAME = 'DJUI'
 local DJUI = LibStub(NAME)
 
 if DJUI.class then
