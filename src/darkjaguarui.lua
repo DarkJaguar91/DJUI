@@ -80,6 +80,14 @@ SLASH_COMMANDS['/rl'] = function()
     ReloadUI()
 end
 
+function printSlashCommands()
+    d('--------------------')
+    d('DJUI - Slash Commands:')
+    d('• unlock - Allow you to move all DJUI frames')
+    d('• lock - Locks all DJUI frames in place')
+    d('--------------------')
+end
+
 SLASH_COMMANDS['/djui'] = function(command)
     if command == 'unlock' then
         for _, v in pairs(DJUI.movableFrames) do
@@ -101,11 +109,13 @@ SLASH_COMMANDS['/djui'] = function(command)
         return
     end
 
-    d('--------------------')
-    d('DJUI - Slash Commands:')
-    d('• unlock - Allow you to move all DJUI frames')
-    d('• lock - Locks all DJUI frames in place')
-    d('--------------------')
+    printSlashCommands()
 end
+
+DJUI:AddEvent(EVENT_PLAYER_ACTIVATED, function()
+    d('--------------------')
+    d('DJUI V' .. tostring(DJUI.version) .. ' Loaded')
+    printSlashCommands()
+end)
 
 --endregion
