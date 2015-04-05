@@ -174,7 +174,6 @@ end
 --region Events
 
 function player:ChangeMoveState(value)
-    d('Player: ' .. (value and 'unlocked' or 'locked'))
     player.tlw:SetMouseEnabled(value)
     player.tlw:SetMovable(value)
 

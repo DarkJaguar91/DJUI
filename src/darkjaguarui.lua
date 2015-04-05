@@ -85,6 +85,8 @@ function printSlashCommands()
     d('DJUI - Slash Commands:')
     d('• unlock - Allow you to move all DJUI frames')
     d('• lock - Locks all DJUI frames in place')
+    d('Instructions:')
+    d('Type: "/djui <command>" in the chat window')
     d('--------------------')
 end
 
