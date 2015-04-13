@@ -121,3 +121,20 @@ DJUI:AddEvent(EVENT_PLAYER_ACTIVATED, function()
 end)
 
 --endregion
+
+
+--local TLW = CreateTopLevelWindow()
+--local bck = CreateControl(nil, TLW, CT_TEXTURE)
+--
+--local txt = CreateControl(nil, TLW, CT_TEXTURE)
+--
+--bck:SetColor(0.5, 0.5, 0.5, 1)
+--txt:SetTexture('/esoui/art/unitattributevisualizer/attributebar_small_fill_leadingedge.dds')
+--
+--TLW:SetDimensions(700, 50)
+--TLW:SetAnchor(CENTER, GuiRoot, CENTER)
+--
+--bck:SetAnchorFill(TLW)
+--txt:SetAnchorFill(TLW)
+--
+----txt:SetTextureCoords(0.06, 0.943, 0.424, 0.568)

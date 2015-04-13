@@ -37,10 +37,12 @@ player.tlw:SetDimensions(300, 95)
 player.health = DJUI.ui.statusBar(player.tlw)
 player.magicka = DJUI.ui.statusBar(player.tlw)
 player.stamina = DJUI.ui.statusBar(player.tlw)
+player.mountStam = DJUI.ui.statusBar(player.tlw)
 
 player.health:SetHeight(20)
 player.magicka:SetHeight(20)
 player.stamina:SetHeight(20)
+player.mountStam:SetHeight(8)
 
 player.health:SetAnchor(TOPLEFT, nil, nil, 0, 20)
 player.health:SetAnchor(TOPRIGHT, nil, nil, 0, 20)
@@ -48,6 +50,8 @@ player.magicka:SetAnchor(TOPLEFT, player.health.background, BOTTOMLEFT)
 player.magicka:SetAnchor(TOPRIGHT, player.health.background, BOTTOMRIGHT)
 player.stamina:SetAnchor(TOPLEFT, player.magicka.background, BOTTOMLEFT)
 player.stamina:SetAnchor(TOPRIGHT, player.magicka.background, BOTTOMRIGHT)
+player.mountStam:SetAnchor(TOPLEFT, player.stamina.background, BOTTOMLEFT)
+player.mountStam:SetAnchor(TOPRIGHT, player.stamina.background, BOTTOMRIGHT, -10)
 
 player.level = CreateControl(nil, player.tlw, CT_LABEL)
 player.level:SetAnchor(TOPLEFT)
@@ -93,6 +97,7 @@ player.bars = {
     [POWERTYPE_HEALTH] = player.health,
     [POWERTYPE_MAGICKA] = player.magicka,
     [POWERTYPE_STAMINA] = player.stamina,
+    [POWERTYPE_MOUNT_STAMINA] = player.mountStam,
 }
 
 --endregion
@@ -198,21 +203,38 @@ DJUI:AddLoad(function(saved)
 
     player:InitBars();
 
+    player.mountStam:SetAlpha(IsMounted() and 1 or 0)
+
     player:CreateSettings()
 
     ZO_PlayerAttributeHealth:SetHidden(true)
     ZO_PlayerAttributeMagicka:SetHidden(true)
     ZO_PlayerAttributeStamina:SetHidden(true)
+    ZO_PlayerAttributeMountStamina:SetHidden(true)
 end)
 
 DJUI:AddEvent(EVENT_POWER_UPDATE, function(_, unitTag, powerIndex, powerType, val, max, effMax)
     if unitTag == player.tag then
         local bar = player.bars[powerType]
         if bar then
-            bar:SetValue(val, max)
+            if powerType == POWERTYPE_MOUNT_STAMINA then
+                bar:SetValue(val * 10, max * 10)
+            else
+                bar:SetValue(val, max)
+            end
         end
         player:UpdateAlpha()
     end
+end)
+
+DJUI:AddEvent(EVENT_LEVEL_UPDATE, function(_, unitTag, level)
+    if unitTag == player.tag then
+        player.level:SetText(level)
+    end
+end)
+
+DJUI:AddEvent(EVENT_MOUNTED_STATE_CHANGED, function(_, mounted)
+    player.mountStam:SetAlpha(mounted and 1 or 0)
 end)
 
 DJUI:AddEvent(EVENT_PLAYER_COMBAT_STATE, function(_, combat)

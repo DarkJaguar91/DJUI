@@ -47,6 +47,15 @@ DJUI.savedDefaults = {
                 valueColor = {0.6, 0.6, 0.6, 1},
                 percentColor = {0.6, 0.6, 0.6, 1},
             },
+            [POWERTYPE_MOUNT_STAMINA] = {
+                color = {0, 0.4, 0.1, 1},
+                barTexture = {'/esoui/art/unitattributevisualizer/attributebar_small_fill_center.dds', nil, {'/esoui/art/unitattributevisualizer/attributebar_small_fill_leadingedge.dds', 10, 10}, nil },
+                glossTexture = {'/esoui/art/unitattributevisualizer/attributebar_small_fill_center_gloss.dds', {0, 1, 0, 1}, {'/esoui/art/unitattributevisualizer/attributebar_small_fill_leadingedge_gloss.dds', 10, 10}, {0, 1, 0, 1}},
+                borderTexture = {'/esoui/art/unitattributevisualizer/attributebar_small_frame.dds', {0.06, 0.943, 0.424, 0.568}},
+                backgroundTexture = {'/esoui/art/unitattributevisualizer/attributebar_small_base.dds', {0.06, 0.943, 0.424, 0.568}},
+                valueColor = {0, 0, 0, 0},
+                percentColor = {0, 0, 0, 0},
+            },
         },
     },
     target = {
@@ -72,5 +81,6 @@ DJUI.savedDefaults = {
 }
 
 DJUI:AddLoad(function()
-    DJUI.saved = ZO_SavedVars:New("DarkJaguarUISavedVars", DJUI.version, 'test', DJUI.savedDefaults)
+--    DJUI.saved = ZO_SavedVars:New("DarkJaguarUISavedVars", DJUI.version, 'test', DJUI.savedDefaults)
+    DJUI.saved = DJUI.savedDefaults
 end)
